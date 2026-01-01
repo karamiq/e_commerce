@@ -1,0 +1,112 @@
+### Create Permission - Users Create
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "users:create",
+  "description": "Permission to create new users"
+}
+
+###
+
+### Create Permission - Users Read
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "users:read",
+  "description": "Permission to view users"
+}
+
+###
+
+### Create Permission - Users Update
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "users:update",
+  "description": "Permission to update users"
+}
+
+###
+
+### Create Permission - Users Delete
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "users:delete",
+  "description": "Permission to delete users"
+}
+
+###
+
+### Create Permission - Products Create
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "products:create",
+  "description": "Permission to create products"
+}
+
+###
+
+### Create Permission - Products Read
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "products:read",
+  "description": "Permission to view products"
+}
+
+###
+
+### Create Permission - Products Update
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "products:update",
+  "description": "Permission to update products"
+}
+
+###
+
+### Create Permission - Products Delete
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "products:delete",
+  "description": "Permission to delete products"
+}
+
+###
+
+### Create Permission - Orders Create
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "orders:create",
+  "description": "Permission to create orders"
+}
+
+###
+
+### Create Permission - Orders Read
+POST http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+{
+  "name": "orders:read",
+  "description": "Permission to view orders"
+}
+
+###
+
+### Get All Permissions
+GET http://127.0.0.1:3000/api/permissions

@@ -1,0 +1,45 @@
+### Step 1: Get all roles and find "superior" role
+GET http://127.0.0.1:3000/api/roles
+Content-Type: application/json
+
+###
+
+### Step 2: Get all permissions (to get their IDs)
+GET http://127.0.0.1:3000/api/permissions
+Content-Type: application/json
+
+###
+
+### Step 3: Attach all permissions to "superior" role
+# Replace {SUPERIOR_ROLE_ID} with the actual UUID from Step 1
+# Replace the permissionIds array with all permission IDs from Step 2
+PATCH http://127.0.0.1:3000/api/roles/{SUPERIOR_ROLE_ID}/permissions/add
+Content-Type: application/json
+
+{
+  "permissionIds": [
+    "permission-uuid-1",
+    "permission-uuid-2",
+    "permission-uuid-3",
+    "permission-uuid-4",
+    "permission-uuid-5",
+    "permission-uuid-6",
+    "permission-uuid-7",
+    "permission-uuid-8",
+    "permission-uuid-9",
+    "permission-uuid-10"
+  ]
+}
+
+###
+
+### Alternative: Get specific role by name (if search/filter is available)
+# Use this to directly get the superior role
+GET http://127.0.0.1:3000/api/roles?name=superior
+Content-Type: application/json
+
+###
+
+### Verify: Get the superior role with its permissions
+GET http://127.0.0.1:3000/api/roles/{SUPERIOR_ROLE_ID}
+Content-Type: application/json

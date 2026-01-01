@@ -1,0 +1,96 @@
+### Create Role - Admin (with all permissions)
+POST http://127.0.0.1:3000/api/roles
+Content-Type: application/json
+
+{
+  "name": "admin",
+  "description": "Administrator with full access",
+  "permissionIds": [
+    "PERMISSION_ID_1",
+    "PERMISSION_ID_2",
+    "PERMISSION_ID_3",
+    "PERMISSION_ID_4",
+    "PERMISSION_ID_5",
+    "PERMISSION_ID_6",
+    "PERMISSION_ID_7",
+    "PERMISSION_ID_8",
+    "PERMISSION_ID_9",
+    "PERMISSION_ID_10"
+  ]
+}
+
+###
+
+### Create Role - Manager (users and products permissions)
+POST http://127.0.0.1:3000/api/roles
+Content-Type: application/json
+
+{
+  "name": "manager",
+  "description": "Manager with user and product management",
+  "permissionIds": [
+    "PERMISSION_ID_1",
+    "PERMISSION_ID_2",
+    "PERMISSION_ID_3",
+    "PERMISSION_ID_5",
+    "PERMISSION_ID_6",
+    "PERMISSION_ID_7"
+  ]
+}
+
+###
+
+### Create Role - Sales (orders and products read)
+POST http://127.0.0.1:3000/api/roles
+Content-Type: application/json
+
+{
+  "name": "sales",
+  "description": "Sales representative with order and product access",
+  "permissionIds": [
+    "PERMISSION_ID_6",
+    "PERMISSION_ID_9",
+    "PERMISSION_ID_10"
+  ]
+}
+
+###
+
+### Create Role - Customer Service (read-only)
+POST http://127.0.0.1:3000/api/roles
+Content-Type: application/json
+
+{
+  "name": "customer_service",
+  "description": "Customer service with read-only access",
+  "permissionIds": [
+    "PERMISSION_ID_2",
+    "PERMISSION_ID_6",
+    "PERMISSION_ID_10"
+  ]
+}
+
+###
+
+### Get All Roles
+GET http://127.0.0.1:3000/api/roles?page=1&limit=10
+
+###
+
+### Instructions:
+# 1. First, run all requests in create-permissions.http to create permissions
+# 2. Copy the permission IDs from the responses
+# 3. Replace PERMISSION_ID_1, PERMISSION_ID_2, etc. with actual UUIDs
+# 4. Then run the role creation requests above
+#
+# Permission mapping:
+# PERMISSION_ID_1  = users:create
+# PERMISSION_ID_2  = users:read
+# PERMISSION_ID_3  = users:update
+# PERMISSION_ID_4  = users:delete
+# PERMISSION_ID_5  = products:create
+# PERMISSION_ID_6  = products:read
+# PERMISSION_ID_7  = products:update
+# PERMISSION_ID_8  = products:delete
+# PERMISSION_ID_9  = orders:create
+# PERMISSION_ID_10 = orders:read

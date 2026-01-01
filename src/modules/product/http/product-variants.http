@@ -1,0 +1,225 @@
+@baseUrl = http://localhost:3000/api
+@token = YOUR_ACCESS_TOKEN_HERE
+@productId = e51fefc9-1163-44b4-ac21-b1d2a31075ce
+@blackValueId = dceea951-18bf-4a9d-84f5-e03831a4d2a5
+@whiteValueId = 514fa289-646d-4338-aef3-0dd7b219a8d0
+@silverValueId = f50d92fc-7914-4e3f-9e80-34500ca012ee
+@goldValueId = 52a36a18-15d0-4ef1-8070-66dd82b3d4bc
+@storage128Id = 6476e4fa-1daf-43e9-a226-35c801452585
+@storage256Id = 43aee69f-2424-49e6-beef-2cccb0404a5d
+@storage512Id = 99803a38-c84c-46f1-8161-6a31c827cf5d
+@storage1TBId = 58b2f64e-7a41-4c83-8813-7f2c15441f27
+
+###
+
+### ===== iPhone 15 Pro Variants =====
+
+### Create Variant 1 - iPhone 15 Pro Black 128GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-BLK-128",
+  "additionalPrice": 0,
+  "stockQuantity": 50,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-black-128.jpg",
+  "attributeValueIds": [
+    "{{blackValueId}}",
+    "{{storage128Id}}"
+  ]
+}
+
+### Create Variant 2 - iPhone 15 Pro Black 256GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-BLK-256",
+  "additionalPrice": 100,
+  "stockQuantity": 45,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-black-256.jpg",
+  "attributeValueIds": [
+    "{{blackValueId}}",
+    "{{storage256Id}}"
+  ]
+}
+
+### Create Variant 3 - iPhone 15 Pro Black 512GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-BLK-512",
+  "additionalPrice": 200,
+  "stockQuantity": 30,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-black-512.jpg",
+  "attributeValueIds": [
+    "{{blackValueId}}",
+    "{{storage512Id}}"
+  ]
+}
+
+### Create Variant 4 - iPhone 15 Pro Black 1TB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-BLK-1TB",
+  "additionalPrice": 400,
+  "stockQuantity": 20,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-black-1tb.jpg",
+  "attributeValueIds": [
+    "{{blackValueId}}",
+    "{{storage1TBId}}"
+  ]
+}
+
+### Create Variant 5 - iPhone 15 Pro White 128GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-WHT-128",
+  "additionalPrice": 0,
+  "stockQuantity": 48,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-white-128.jpg",
+  "attributeValueIds": [
+    "{{whiteValueId}}",
+    "{{storage128Id}}"
+  ]
+}
+
+### Create Variant 6 - iPhone 15 Pro White 256GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-WHT-256",
+  "additionalPrice": 100,
+  "stockQuantity": 42,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-white-256.jpg",
+  "attributeValueIds": [
+    "{{whiteValueId}}",
+    "{{storage256Id}}"
+  ]
+}
+
+### Create Variant 7 - iPhone 15 Pro Silver 128GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-SLV-128",
+  "additionalPrice": 0,
+  "stockQuantity": 35,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-silver-128.jpg",
+  "attributeValueIds": [
+    "{{silverValueId}}",
+    "{{storage128Id}}"
+  ]
+}
+
+### Create Variant 8 - iPhone 15 Pro Silver 256GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-SLV-256",
+  "additionalPrice": 100,
+  "stockQuantity": 38,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-silver-256.jpg",
+  "attributeValueIds": [
+    "{{silverValueId}}",
+    "{{storage256Id}}"
+  ]
+}
+
+### Create Variant 9 - iPhone 15 Pro Gold 256GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-GLD-256",
+  "additionalPrice": 100,
+  "stockQuantity": 25,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-gold-256.jpg",
+  "attributeValueIds": [
+    "{{goldValueId}}",
+    "{{storage256Id}}"
+  ]
+}
+
+### Create Variant 10 - iPhone 15 Pro Gold 512GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "sku": "IPHONE-15-PRO-GLD-512",
+  "additionalPrice": 200,
+  "stockQuantity": 22,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-gold-512.jpg",
+  "attributeValueIds": [
+    "{{goldValueId}}",
+    "{{storage512Id}}"
+  ]
+}
+
+### ===== QUERY OPERATIONS =====
+
+### Get All Product Variants
+GET {{baseUrl}}/products/variants/all
+Authorization: Bearer {{token}}
+
+### Get Product Variants by Product ID
+GET {{baseUrl}}/products/{{productId}}/variants
+Authorization: Bearer {{token}}
+
+### Get Product Variant by ID
+@variantId = REPLACE_WITH_ACTUAL_ID
+GET {{baseUrl}}/products/variants/{{variantId}}
+Authorization: Bearer {{token}}
+
+### Update Product Variant
+PUT {{baseUrl}}/products/variants/{{variantId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "additionalPrice": 150,
+  "stockQuantity": 100,
+  "isActive": true
+}
+
+### Delete Product Variant
+DELETE {{baseUrl}}/products/variants/{{variantId}}
+Authorization: Bearer {{token}}

@@ -1,0 +1,133 @@
+@baseUrl = http://localhost:3000/api
+@token = YOUR_ACCESS_TOKEN_HERE
+
+###
+
+### Create Product 1 - iPhone 15 Pro
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "iPhone 15 Pro",
+  "description": "The most powerful iPhone ever with A17 Pro chip, titanium design, and advanced camera system",
+  "sku": "IPHONE-15-PRO",
+  "basePrice": 999.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro.jpg"
+}
+
+### Create Product 2 - MacBook Pro 16"
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "MacBook Pro 16-inch",
+  "description": "Supercharged by M3 Pro and M3 Max chips. Longest battery life ever in a Mac. Stunning Liquid Retina XDR display.",
+  "sku": "MACBOOK-PRO-16",
+  "basePrice": 2499.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/macbookpro16.jpg"
+}
+
+### Create Product 3 - AirPods Pro
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "AirPods Pro (2nd generation)",
+  "description": "Active Noise Cancellation, Adaptive Transparency, Personalized Spatial Audio, and up to 6 hours of listening time",
+  "sku": "AIRPODS-PRO-2",
+  "basePrice": 249.00,
+  "stockQuantity": 150,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/airpodspro.jpg"
+}
+
+### Create Product 4 - iPad Air
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "iPad Air",
+  "description": "Serious performance in a thin and light design. M1 chip. Liquid Retina display. Blazing-fast 5G.",
+  "sku": "IPAD-AIR-M1",
+  "basePrice": 599.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/ipadair.jpg"
+}
+
+### Create Product 5 - Apple Watch Series 9
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Apple Watch Series 9",
+  "description": "Our most powerful chip yet. A magical new way to use your Apple Watch without touching the display. The brightest Apple Watch display.",
+  "sku": "WATCH-SERIES-9",
+  "basePrice": 399.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/watchseries9.jpg"
+}
+
+### Create Product 6 - Samsung Galaxy S24 Ultra
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Samsung Galaxy S24 Ultra",
+  "description": "Meet Galaxy AI. Epic, now in Galaxy. The power of Galaxy AI is here. Search like never before. Get real-time interpretation.",
+  "sku": "GALAXY-S24-ULTRA",
+  "basePrice": 1199.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/galaxys24ultra.jpg"
+}
+
+### Create Product 7 - Sony WH-1000XM5 Headphones
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Sony WH-1000XM5 Wireless Headphones",
+  "description": "Industry-leading noise cancellation with new Auto NC Optimizer. Crystal clear hands-free calling. Up to 30-hour battery life.",
+  "sku": "SONY-WH1000XM5",
+  "basePrice": 399.00,
+  "stockQuantity": 75,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/sonywh1000xm5.jpg"
+}
+
+### Get All Products
+GET {{baseUrl}}/products
+Authorization: Bearer {{token}}
+
+### Get Product by ID
+@productId = REPLACE_WITH_ACTUAL_ID
+GET {{baseUrl}}/products/{{productId}}
+Authorization: Bearer {{token}}
+
+### Update Product
+PUT {{baseUrl}}/products/{{productId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "basePrice": 1099.00,
+  "stockQuantity": 200,
+  "description": "Updated description - Now with even better features!"
+}
+
+### Delete Product
+DELETE {{baseUrl}}/products/{{productId}}
+Authorization: Bearer {{token}}

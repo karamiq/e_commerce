@@ -1,0 +1,445 @@
+### Complete Product Creation Workflow
+### This file demonstrates the complete process of creating products with variants
+### Execute requests in order and replace variables with returned IDs
+
+@baseUrl = http://localhost:3000/api
+@token = YOUR_ACCESS_TOKEN_HERE
+
+###
+
+### ============================================================
+### STEP 1: Create Attributes
+### ============================================================
+
+### 1.1 Create Color Attribute
+# @name createColorAttribute
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Color",
+  "description": "Product color options",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### 1.2 Create Storage Attribute
+# @name createStorageAttribute
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Storage",
+  "description": "Storage capacity",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### ============================================================
+### STEP 2: Create Attribute Values for Color
+### ============================================================
+
+### 2.1 Create Black Color Value
+# @name createBlackValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createColorAttribute.response.body.id}}",
+  "value": "Black",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### 2.2 Create White Color Value
+# @name createWhiteValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createColorAttribute.response.body.id}}",
+  "value": "White",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### 2.3 Create Silver Color Value
+# @name createSilverValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createColorAttribute.response.body.id}}",
+  "value": "Silver",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### 2.4 Create Gold Color Value
+# @name createGoldValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createColorAttribute.response.body.id}}",
+  "value": "Gold",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### 2.5 Create Blue Color Value
+# @name createBlueValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createColorAttribute.response.body.id}}",
+  "value": "Blue",
+  "displayOrder": 5,
+  "isActive": true
+}
+
+### ============================================================
+### STEP 3: Create Attribute Values for Storage
+### ============================================================
+
+### 3.1 Create 128GB Storage Value
+# @name create128GBValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createStorageAttribute.response.body.id}}",
+  "value": "128GB",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### 3.2 Create 256GB Storage Value
+# @name create256GBValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createStorageAttribute.response.body.id}}",
+  "value": "256GB",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### 3.3 Create 512GB Storage Value
+# @name create512GBValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createStorageAttribute.response.body.id}}",
+  "value": "512GB",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### 3.4 Create 1TB Storage Value
+# @name create1TBValue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{createStorageAttribute.response.body.id}}",
+  "value": "1TB",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### ============================================================
+### STEP 4: Create Products
+### ============================================================
+
+### 4.1 Create iPhone 15 Pro
+# @name createIPhone15Pro
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "iPhone 15 Pro",
+  "description": "The most powerful iPhone ever with A17 Pro chip",
+  "sku": "IPHONE-15-PRO",
+  "basePrice": 999.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro.jpg"
+}
+
+### 4.2 Create Samsung Galaxy S24 Ultra
+# @name createGalaxyS24
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Samsung Galaxy S24 Ultra",
+  "description": "Galaxy AI meets premium smartphone design",
+  "sku": "GALAXY-S24-ULTRA",
+  "basePrice": 1199.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/galaxys24ultra.jpg"
+}
+
+### 4.3 Create MacBook Pro 16"
+# @name createMacBookPro
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "MacBook Pro 16-inch",
+  "description": "Supercharged by M3 Pro chip",
+  "sku": "MACBOOK-PRO-16",
+  "basePrice": 2499.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/macbookpro16.jpg"
+}
+
+### 4.4 Create iPad Air
+# @name createIPadAir
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "iPad Air",
+  "description": "Serious performance with M1 chip",
+  "sku": "IPAD-AIR-M1",
+  "basePrice": 599.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/ipadair.jpg"
+}
+
+### 4.5 Create Apple Watch Series 9
+# @name createAppleWatch
+POST {{baseUrl}}/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Apple Watch Series 9",
+  "description": "Most powerful Apple Watch yet",
+  "sku": "WATCH-SERIES-9",
+  "basePrice": 399.00,
+  "stockQuantity": 0,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/watchseries9.jpg"
+}
+
+### ============================================================
+### STEP 5: Create Product Variants for iPhone 15 Pro
+### ============================================================
+
+### 5.1 iPhone 15 Pro - Black 128GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createIPhone15Pro.response.body.id}}",
+  "sku": "IPHONE-15-PRO-BLK-128",
+  "additionalPrice": 0,
+  "stockQuantity": 50,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-black.jpg",
+  "attributeValueIds": [
+    "{{createBlackValue.response.body.id}}",
+    "{{create128GBValue.response.body.id}}"
+  ]
+}
+
+### 5.2 iPhone 15 Pro - Black 256GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createIPhone15Pro.response.body.id}}",
+  "sku": "IPHONE-15-PRO-BLK-256",
+  "additionalPrice": 100,
+  "stockQuantity": 45,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-black.jpg",
+  "attributeValueIds": [
+    "{{createBlackValue.response.body.id}}",
+    "{{create256GBValue.response.body.id}}"
+  ]
+}
+
+### 5.3 iPhone 15 Pro - White 256GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createIPhone15Pro.response.body.id}}",
+  "sku": "IPHONE-15-PRO-WHT-256",
+  "additionalPrice": 100,
+  "stockQuantity": 40,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-white.jpg",
+  "attributeValueIds": [
+    "{{createWhiteValue.response.body.id}}",
+    "{{create256GBValue.response.body.id}}"
+  ]
+}
+
+### 5.4 iPhone 15 Pro - Silver 512GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createIPhone15Pro.response.body.id}}",
+  "sku": "IPHONE-15-PRO-SLV-512",
+  "additionalPrice": 200,
+  "stockQuantity": 30,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-silver.jpg",
+  "attributeValueIds": [
+    "{{createSilverValue.response.body.id}}",
+    "{{create512GBValue.response.body.id}}"
+  ]
+}
+
+### 5.5 iPhone 15 Pro - Gold 1TB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createIPhone15Pro.response.body.id}}",
+  "sku": "IPHONE-15-PRO-GLD-1TB",
+  "additionalPrice": 400,
+  "stockQuantity": 20,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/iphone15pro-gold.jpg",
+  "attributeValueIds": [
+    "{{createGoldValue.response.body.id}}",
+    "{{create1TBValue.response.body.id}}"
+  ]
+}
+
+### ============================================================
+### STEP 6: Create Variants for Galaxy S24 Ultra
+### ============================================================
+
+### 6.1 Galaxy S24 Ultra - Black 256GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createGalaxyS24.response.body.id}}",
+  "sku": "GALAXY-S24-ULTRA-BLK-256",
+  "additionalPrice": 0,
+  "stockQuantity": 60,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/galaxys24-black.jpg",
+  "attributeValueIds": [
+    "{{createBlackValue.response.body.id}}",
+    "{{create256GBValue.response.body.id}}"
+  ]
+}
+
+### 6.2 Galaxy S24 Ultra - Silver 512GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createGalaxyS24.response.body.id}}",
+  "sku": "GALAXY-S24-ULTRA-SLV-512",
+  "additionalPrice": 120,
+  "stockQuantity": 45,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/galaxys24-silver.jpg",
+  "attributeValueIds": [
+    "{{createSilverValue.response.body.id}}",
+    "{{create512GBValue.response.body.id}}"
+  ]
+}
+
+### 6.3 Galaxy S24 Ultra - Blue 512GB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createGalaxyS24.response.body.id}}",
+  "sku": "GALAXY-S24-ULTRA-BLU-512",
+  "additionalPrice": 120,
+  "stockQuantity": 35,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/galaxys24-blue.jpg",
+  "attributeValueIds": [
+    "{{createBlueValue.response.body.id}}",
+    "{{create512GBValue.response.body.id}}"
+  ]
+}
+
+### 6.4 Galaxy S24 Ultra - Gold 1TB
+POST {{baseUrl}}/products/variants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": "{{createGalaxyS24.response.body.id}}",
+  "sku": "GALAXY-S24-ULTRA-GLD-1TB",
+  "additionalPrice": 300,
+  "stockQuantity": 25,
+  "isActive": true,
+  "imageUrl": "https://example.com/images/galaxys24-gold.jpg",
+  "attributeValueIds": [
+    "{{createGoldValue.response.body.id}}",
+    "{{create1TBValue.response.body.id}}"
+  ]
+}
+
+### ============================================================
+### STEP 7: Verify Created Data
+### ============================================================
+
+### Get All Products (should show 5 products)
+GET {{baseUrl}}/products
+Authorization: Bearer {{token}}
+
+### Get All Attributes (should show 2 attributes)
+GET {{baseUrl}}/products/attributes/all
+Authorization: Bearer {{token}}
+
+### Get All Attribute Values (should show 9+ values)
+GET {{baseUrl}}/products/attribute-values/all
+Authorization: Bearer {{token}}
+
+### Get All Product Variants (should show 9+ variants)
+GET {{baseUrl}}/products/variants/all
+Authorization: Bearer {{token}}
+
+### Get Specific Product with All Variants
+GET {{baseUrl}}/products/{{createIPhone15Pro.response.body.id}}
+Authorization: Bearer {{token}}
+
+### Get Color Attribute with Values
+GET {{baseUrl}}/products/attributes/{{createColorAttribute.response.body.id}}
+Authorization: Bearer {{token}}

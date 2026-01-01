@@ -1,0 +1,99 @@
+@baseUrl = http://localhost:3000/api
+@token = YOUR_ACCESS_TOKEN_HERE
+
+###
+
+### Create Attribute 1 - Color
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Color",
+  "description": "Product color options",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### Create Attribute 2 - Size
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Size",
+  "description": "Product size options",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### Create Attribute 3 - Storage
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Storage",
+  "description": "Storage capacity options",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### Create Attribute 4 - Material
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Material",
+  "description": "Product material type",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### Create Attribute 5 - Style
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Style",
+  "description": "Product style variant",
+  "displayOrder": 5,
+  "isActive": true
+}
+
+### Create Attribute 6 - Memory
+POST {{baseUrl}}/products/attributes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Memory",
+  "description": "RAM memory size",
+  "displayOrder": 6,
+  "isActive": true
+}
+
+### Get All Attributes
+GET {{baseUrl}}/products/attributes/all
+Authorization: Bearer {{token}}
+
+### Get Attribute by ID
+@attributeId = REPLACE_WITH_ACTUAL_ID
+GET {{baseUrl}}/products/attributes/{{attributeId}}
+Authorization: Bearer {{token}}
+
+### Update Attribute
+PUT {{baseUrl}}/products/attributes/{{attributeId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "description": "Updated color options for products",
+  "displayOrder": 10
+}
+
+### Delete Attribute
+DELETE {{baseUrl}}/products/attributes/{{attributeId}}
+Authorization: Bearer {{token}}

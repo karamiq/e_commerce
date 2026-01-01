@@ -1,0 +1,360 @@
+@baseUrl = http://localhost:3000/api
+@token = YOUR_ACCESS_TOKEN_HERE
+@colorAttributeId = 99af89e5-11ef-4775-96c8-9525ae0ff023
+@sizeAttributeId = 1d04b546-d525-482f-9525-bce024e0d3ea
+@storageAttributeId = fb8ccdb3-d02f-40a1-81fc-b0af3ed9aafb
+@materialAttributeId = 0021fd2d-70d9-4707-a6cf-97eea914796c
+@styleAttributeId = c23a1b93-d4cf-4804-a636-b5e2a11c9ce0
+
+###
+
+### ===== COLOR ATTRIBUTE VALUES =====
+
+### Create Color Value 1 - Black
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{colorAttributeId}}",
+  "value": "Black",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### Create Color Value 2 - White
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{colorAttributeId}}",
+  "value": "White",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### Create Color Value 3 - Silver
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{colorAttributeId}}",
+  "value": "Silver",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### Create Color Value 4 - Gold
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{colorAttributeId}}",
+  "value": "Gold",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### Create Color Value 5 - Blue
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{colorAttributeId}}",
+  "value": "Blue",
+  "displayOrder": 5,
+  "isActive": true
+}
+
+### Create Color Value 6 - Red
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{colorAttributeId}}",
+  "value": "Red",
+  "displayOrder": 6,
+  "isActive": true
+}
+
+### ===== SIZE ATTRIBUTE VALUES =====
+
+### Create Size Value 1 - Small
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{sizeAttributeId}}",
+  "value": "Small",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### Create Size Value 2 - Medium
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{sizeAttributeId}}",
+  "value": "Medium",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### Create Size Value 3 - Large
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{sizeAttributeId}}",
+  "value": "Large",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### Create Size Value 4 - X-Large
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{sizeAttributeId}}",
+  "value": "X-Large",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### Create Size Value 5 - XX-Large
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{sizeAttributeId}}",
+  "value": "XX-Large",
+  "displayOrder": 5,
+  "isActive": true
+}
+
+### ===== STORAGE ATTRIBUTE VALUES =====
+
+### Create Storage Value 1 - 64GB
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{storageAttributeId}}",
+  "value": "64GB",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### Create Storage Value 2 - 128GB
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{storageAttributeId}}",
+  "value": "128GB",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### Create Storage Value 3 - 256GB
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{storageAttributeId}}",
+  "value": "256GB",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### Create Storage Value 4 - 512GB
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{storageAttributeId}}",
+  "value": "512GB",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### Create Storage Value 5 - 1TB
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{storageAttributeId}}",
+  "value": "1TB",
+  "displayOrder": 5,
+  "isActive": true
+}
+
+### ===== MATERIAL ATTRIBUTE VALUES =====
+
+### Create Material Value 1 - Cotton
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{materialAttributeId}}",
+  "value": "Cotton",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### Create Material Value 2 - Polyester
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{materialAttributeId}}",
+  "value": "Polyester",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### Create Material Value 3 - Leather
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{materialAttributeId}}",
+  "value": "Leather",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### Create Material Value 4 - Denim
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{materialAttributeId}}",
+  "value": "Denim",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### Create Material Value 5 - Wool
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{materialAttributeId}}",
+  "value": "Wool",
+  "displayOrder": 5,
+  "isActive": true
+}
+
+### ===== STYLE ATTRIBUTE VALUES =====
+
+### Create Style Value 1 - Casual
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{styleAttributeId}}",
+  "value": "Casual",
+  "displayOrder": 1,
+  "isActive": true
+}
+
+### Create Style Value 2 - Formal
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{styleAttributeId}}",
+  "value": "Formal",
+  "displayOrder": 2,
+  "isActive": true
+}
+
+### Create Style Value 3 - Sport
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{styleAttributeId}}",
+  "value": "Sport",
+  "displayOrder": 3,
+  "isActive": true
+}
+
+### Create Style Value 4 - Business
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{styleAttributeId}}",
+  "value": "Business",
+  "displayOrder": 4,
+  "isActive": true
+}
+
+### Create Style Value 5 - Vintage
+POST {{baseUrl}}/products/attribute-values
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "attributeId": "{{styleAttributeId}}",
+  "value": "Vintage",
+  "displayOrder": 5,
+  "isActive": true
+}
+
+### ===== QUERY OPERATIONS =====
+
+### Get All Attribute Values
+GET {{baseUrl}}/products/attribute-values/all
+Authorization: Bearer {{token}}
+
+### Get Attribute Values by Attribute ID
+GET {{baseUrl}}/products/attributes/{{colorAttributeId}}/values
+Authorization: Bearer {{token}}
+
+### Get Attribute Value by ID
+@attributeValueId = REPLACE_WITH_ACTUAL_ID
+GET {{baseUrl}}/products/attribute-values/{{attributeValueId}}
+Authorization: Bearer {{token}}
+
+### Update Attribute Value
+PUT {{baseUrl}}/products/attribute-values/{{attributeValueId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "value": "Midnight Black",
+  "displayOrder": 10
+}
+
+### Delete Attribute Value
+DELETE {{baseUrl}}/products/attribute-values/{{attributeValueId}}
+Authorization: Bearer {{token}}

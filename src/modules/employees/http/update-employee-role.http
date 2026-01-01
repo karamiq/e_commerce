@@ -1,0 +1,39 @@
+### Update Employee Role
+
+# Step 1: Get all employees to find the employee you want to update
+GET http://127.0.0.1:3000/api/employees
+Content-Type: application/json
+
+###
+
+# Step 2: Get all roles to find the role ID you want to assign
+GET http://127.0.0.1:3000/api/roles
+Content-Type: application/json
+
+###
+
+# Step 3: Update the employee's role
+# Replace {EMPLOYEE_ID} with the actual employee UUID
+# Replace {ROLE_ID} with the actual role UUID
+PATCH http://127.0.0.1:3000/api/employees/{EMPLOYEE_ID}/role
+Content-Type: application/json
+
+{
+  "roleId": "{ROLE_ID}"
+}
+
+###
+
+# Example: Assign "superior" role to an employee
+PATCH http://127.0.0.1:3000/api/employees/123e4567-e89b-12d3-a456-426614174000/role
+Content-Type: application/json
+
+{
+  "roleId": "550e8400-e29b-41d4-a716-446655440000"
+}
+
+###
+
+# Verify: Get the employee to confirm the role has been updated
+GET http://127.0.0.1:3000/api/employees/{EMPLOYEE_ID}
+Content-Type: application/json
