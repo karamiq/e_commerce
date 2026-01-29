@@ -1,0 +1,683 @@
+@baseUrl = http://localhost:3000/api
+
+###
+# Governorates
+###
+
+### Baghdad
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Baghdad"
+}
+ > {% client.global.set("gov_baghdad_id", "abca0d93-5a9d-441b-96b7-e2f3a6f137c5"); %}
+
+### Al Anbar
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Al Anbar"
+}
+ > {% client.global.set("gov_anbar_id", response.body.data.id); %}
+
+### Babil
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Babil"
+}
+ > {% client.global.set("gov_babil_id", response.body.data.id); %}
+
+### Basra
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Basra"
+}
+ > {% client.global.set("gov_basra_id", response.body.data.id); %}
+
+### Dhi Qar
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Dhi Qar"
+}
+ > {% client.global.set("gov_dhiqar_id", response.body.data.id); %}
+
+### Diyala
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Diyala"
+}
+ > {% client.global.set("gov_diyala_id", response.body.data.id); %}
+
+### Duhok
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Duhok"
+}
+ > {% client.global.set("gov_duhok_id", response.body.data.id); %}
+
+### Erbil
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Erbil"
+}
+ > {% client.global.set("gov_erbil_id", response.body.data.id); %}
+
+### Karbala
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Karbala"
+}
+ > {% client.global.set("gov_karbala_id", response.body.data.id); %}
+
+### Kirkuk
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Kirkuk"
+}
+ > {% client.global.set("gov_kirkuk_id", response.body.data.id); %}
+
+### Maysan
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Maysan"
+}
+ > {% client.global.set("gov_maysan_id", response.body.data.id); %}
+
+### Al Muthanna
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Al Muthanna"
+}
+ > {% client.global.set("gov_muthanna_id", response.body.data.id); %}
+
+### Najaf
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Najaf"
+}
+ > {% client.global.set("gov_najaf_id", response.body.data.id); %}
+
+### Nineveh
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Nineveh"
+}
+ > {% client.global.set("gov_nineveh_id", response.body.data.id); %}
+
+### Al-Qadisiyyah
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Al-Qadisiyyah"
+}
+ > {% client.global.set("gov_qadisiyyah_id", response.body.data.id); %}
+
+### Salah ad-Din
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Salah ad-Din"
+}
+ > {% client.global.set("gov_salah_id", response.body.data.id); %}
+
+### Sulaymaniyah
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Sulaymaniyah"
+}
+ > {% client.global.set("gov_sulaymaniyah_id", response.body.data.id); %}
+
+### Wasit
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Wasit"
+}
+ > {% client.global.set("gov_wasit_id", response.body.data.id); %}
+
+### Halabja
+POST {{baseUrl}}/governorates
+Content-Type: application/json
+
+{
+  "name": "Halabja"
+}
+ > {% client.global.set("gov_halabja_id", response.body.data.id); %}
+
+###
+# Cities per governorate (major cities incl. capitals)
+###
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Al-Musayab",
+  "governorateId": "{{gov_babil_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Hashimiya",
+  "governorateId": "{{gov_babil_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Mahawil",
+  "governorateId": "{{gov_babil_id}}"
+}
+
+# Basra Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Basra",
+  "governorateId": "{{gov_basra_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Az Zubayr",
+  "governorateId": "{{gov_basra_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Al-Qurnah",
+  "governorateId": "{{gov_basra_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Abu Al-Khasib",
+  "governorateId": "{{gov_basra_id}}"
+}
+
+# Dhi Qar Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Nasiriyah",
+  "governorateId": "{{gov_dhiqar_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Suq Al-Shuyukh",
+  "governorateId": "{{gov_dhiqar_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Shatra",
+  "governorateId": "{{gov_dhiqar_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+
+{
+  "name": "Rifai",
+  "governorateId": "{{gov_dhiqar_id}}"
+}
+
+# Diyala Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Baqubah",
+  "governorateId": "{{gov_diyala_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Khanaqin",
+  "governorateId": "{{gov_diyala_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Muqdadiya",
+  "governorateId": "{{gov_diyala_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Balad Ruz",
+  "governorateId": "{{gov_diyala_id}}"
+}
+
+# Duhok Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Duhok",
+  "governorateId": "{{gov_duhok_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Zakho",
+  "governorateId": "{{gov_duhok_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Amedi",
+  "governorateId": "{{gov_duhok_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Sumel",
+  "governorateId": "{{gov_duhok_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Akre",
+  "governorateId": "{{gov_duhok_id}}"
+}
+
+# Erbil Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Erbil",
+  "governorateId": "{{gov_erbil_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Soran",
+  "governorateId": "{{gov_erbil_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Shaqlawa",
+  "governorateId": "{{gov_erbil_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Koy Sanjaq",
+  "governorateId": "{{gov_erbil_id}}"
+}
+
+# Karbala Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Karbala",
+  "governorateId": "{{gov_karbala_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Ain al-Tamur",
+  "governorateId": "{{gov_karbala_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Al-Hindiya",
+  "governorateId": "{{gov_karbala_id}}"
+}
+
+# Kirkuk Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Kirkuk",
+  "governorateId": "{{gov_kirkuk_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Daquq",
+  "governorateId": "{{gov_kirkuk_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Hawija",
+  "governorateId": "{{gov_kirkuk_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Dibis",
+  "governorateId": "{{gov_kirkuk_id}}"
+}
+
+# Maysan Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Amarah",
+  "governorateId": "{{gov_maysan_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Kumait",
+  "governorateId": "{{gov_maysan_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Ali Al Gharbi",
+  "governorateId": "{{gov_maysan_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Maimona",
+  "governorateId": "{{gov_maysan_id}}"
+}
+
+# Al Muthanna Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Samawah",
+  "governorateId": "{{gov_muthanna_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Rumaitha",
+  "governorateId": "{{gov_muthanna_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Khidhir",
+  "governorateId": "{{gov_muthanna_id}}"
+}
+
+# Najaf Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Najaf",
+  "governorateId": "{{gov_najaf_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Kufa",
+  "governorateId": "{{gov_najaf_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Manathira",
+  "governorateId": "{{gov_najaf_id}}"
+}
+
+# Nineveh Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Mosul",
+  "governorateId": "{{gov_nineveh_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Tal Afar",
+  "governorateId": "{{gov_nineveh_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Sinjar",
+  "governorateId": "{{gov_nineveh_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Hamdaniya",
+  "governorateId": "{{gov_nineveh_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Shekhan",
+  "governorateId": "{{gov_nineveh_id}}"
+}
+
+# Al-Qadisiyyah Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Diwaniyah",
+  "governorateId": "{{gov_qadisiyyah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Afak",
+  "governorateId": "{{gov_qadisiyyah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Al-Shamiya",
+  "governorateId": "{{gov_qadisiyyah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Hamza",
+  "governorateId": "{{gov_qadisiyyah_id}}"
+}
+
+# Salah ad-Din Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Tikrit",
+  "governorateId": "{{gov_salah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Samarra",
+  "governorateId": "{{gov_salah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Baiji",
+  "governorateId": "{{gov_salah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Shirqat",
+  "governorateId": "{{gov_salah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Tuz Khurmatu",
+  "governorateId": "{{gov_salah_id}}"
+}
+
+# Sulaymaniyah Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Sulaymaniyah",
+  "governorateId": "{{gov_sulaymaniyah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Chamchamal",
+  "governorateId": "{{gov_sulaymaniyah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Kalar",
+  "governorateId": "{{gov_sulaymaniyah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Darbandikhan",
+  "governorateId": "{{gov_sulaymaniyah_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Penjwen",
+  "governorateId": "{{gov_sulaymaniyah_id}}"
+}
+
+# Wasit Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Kut",
+  "governorateId": "{{gov_wasit_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Al-Hai",
+  "governorateId": "{{gov_wasit_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Al-Suwaira",
+  "governorateId": "{{gov_wasit_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Numaniyah",
+  "governorateId": "{{gov_wasit_id}}"
+}
+
+# Halabja Governorate
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Halabja",
+  "governorateId": "{{gov_halabja_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Khurmal",
+  "governorateId": "{{gov_halabja_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Byara",
+  "governorateId": "{{gov_halabja_id}}"
+}
+
+POST {{baseUrl}}/cities
+Content-Type: application/json
+{
+  "name": "Tawella",
+  "governorateId": "{{gov_halabja_id}}"
+}

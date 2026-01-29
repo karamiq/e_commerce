@@ -18,7 +18,7 @@ export class PaginationService {
   public async paginate<T extends ObjectLiteral>(
     paginationQuery: PaginationQueryDto,
     repository: Repository<T>,
-    whereConditions?: FindOptionsWhere<T> | FindOptionsWhere<T>[]
+    whereConditions?: FindOptionsWhere<T>
   ): Promise<Paginated<T>> {
     const page = paginationQuery.page;
     const limit = paginationQuery.limit;

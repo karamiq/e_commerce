@@ -5,13 +5,17 @@ import { ValidationPipe, HttpException, HttpStatus } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import cookieParser from 'cookie-parser';
-
+import { Allow } from 'class-validator';
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
   app.use(cookieParser());
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  })
+
 
   const config = new DocumentBuilder()
     .setTitle('E-Commerce API')
@@ -35,19 +39,14 @@ async function bootstrap() {
       },
       'refresh-token', // Refresh token security scheme
     )
-    .addServer('http://localhost:3000/api', 'Development server')
+    .addServer('https://snt7njkj-3001.inc1.devtunnels.ms/api', 'Development server')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  // Enable CORS
-  app.enableCors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  });
-  app.setGlobalPrefix('api');
 
+  app.setGlobalPrefix('api');
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
 
@@ -76,9 +75,10 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(3000);
+  await app.listen(3001);
 
   console.log(`Application is running on: ${await app.getUrl()}/api`);
+  console.log(`Swagger docs available at: ${await app.getUrl()}/api/docs`);
 
 }
 

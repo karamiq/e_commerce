@@ -19,11 +19,12 @@ export class ResponseInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((data) => {
         const item = data.data ?? data;
-        const meta = data.meta ?? null;
+        const meta = data.meta ?? {};
+        const messege = 'Success';
         return {
           data: item,
           ...meta,
-          message: 'Success',
+          message: messege,
           statusCode: res.statusCode,
         }
       }),
