@@ -95,7 +95,7 @@ export class UsersService {
     async getUserByEmailForAuth(email: string) {
         return this.usersRepository.findOne({
             where: { email },
-            select: ['id', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'createDate'],
+            select: ['id', 'email', 'password', 'firstName', 'lastName', 'phoneNumber', 'createAt'],
         });
     }
 

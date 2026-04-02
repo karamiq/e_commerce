@@ -46,6 +46,12 @@ export default class User {
         }
     )
     profileImageUrl: string;
+
+    @Column({
+        type: 'varchar',
+        length: 20,
+        nullable: true
+    })
     phoneNumber: string;
     @Column({
         type: 'varchar',
@@ -55,7 +61,7 @@ export default class User {
     password: string;
 
     @CreateDateColumn()
-    createDate: Date;
+    createAt: Date;
 
     @DeleteDateColumn()
     deletedAt: Date;

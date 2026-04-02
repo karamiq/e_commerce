@@ -23,6 +23,7 @@ import { PermissionsConstants } from '../permissions/constants/permissions.const
 import { ActiveUser } from '../auth/decorators/active-user.decorator';
 import type ActiveUserData from '../auth/interfaces/active-user-data.interface';
 import { AccessTokenGuard } from '../auth/guards/access-token.guard';
+import { create } from 'domain';
 
 @ApiTags('customers')
 @ApiBearerAuth('access-token')
@@ -75,16 +76,13 @@ export class CustomersController {
   })
   async findAll(@Query() getCustomersDto: GetCustomersDto) {
     const result = await this.customersService.findAll(getCustomersDto);
-    const merged = Array.isArray(result.data);
-
     return result.data.map((customer) => ({
       id: customer.id,
       email: customer.user?.email,
       firstName: customer.user?.firstName,
       lastName: customer.user?.lastName,
       phoneNumber: customer.user?.phoneNumber,
-      selectedDeliveryAddress: customer.selectedDeliveryAddress ?? null,
-    }))
+    }));
 
   }
 
@@ -105,11 +103,11 @@ export class CustomersController {
       firstName: customer.user?.firstName,
       lastName: customer.user?.lastName,
       phoneNumber: customer.user?.phoneNumber,
-      addresses: customer.addresses ?? [],
-      selectedDeliveryAddress: customer.selectedDeliveryAddress ?? null,
+      deletedAt: customer.user?.deletedAt,
+      createdAt: customer.user?.createAt,
+      dateOfBirth: customer.dateOfBirth
     } as any;
   }
-
   @Get(':id')
   @PermissionsDeco(PermissionsConstants.customers.read)
   @ApiOperation({ summary: 'Get a customer by ID' })
@@ -128,8 +126,8 @@ export class CustomersController {
       firstName: customer.user?.firstName,
       lastName: customer.user?.lastName,
       phoneNumber: customer.user?.phoneNumber,
-      addresses: customer.addresses ?? [],
-      selectedDeliveryAddress: customer.selectedDeliveryAddress ?? null,
+      createdAt: customer.user?.createAt,
+      deletedAt: customer.user?.deletedAt,
     } as any;
   }
 

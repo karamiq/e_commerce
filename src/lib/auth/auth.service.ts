@@ -13,6 +13,21 @@ import { CustomersService } from '../customers/customers.service';
 
 @Injectable()
 export class AuthService {
+    async decodeRefreshToken(refreshToken: string) {
+        return this.tokensProvider.decodeRefreshToken(refreshToken);
+    }
+    async validateRefreshToken(refreshToken: string) {
+        const tokenPayload = await this.tokensProvider.decodeRefreshToken(refreshToken);
+        if (!tokenPayload) {
+            return null;
+        }
+        const userId = tokenPayload.sub;
+        const refreshTokens = await this.userRefreshTokenRepository.find({ where: { user: { id: userId } } });
+        if (refreshTokens.length === 0) {
+            return null;
+        }
+        return { id: userId };
+    }
 
     constructor(private usersService: UsersService,
         private tokensProvider: TokensProvider,

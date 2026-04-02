@@ -1,7 +1,7 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ValidationPipe, HttpException, HttpStatus } from '@nestjs/common';
+import { ValidationPipe, HttpException, HttpStatus, ClassSerializerInterceptor } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import cookieParser from 'cookie-parser';
@@ -39,12 +39,11 @@ async function bootstrap() {
       },
       'refresh-token', // Refresh token security scheme
     )
-    .addServer('https://snt7njkj-3001.inc1.devtunnels.ms/api', 'Development server')
+    .addServer('http://localhost:3001/api', 'Development server')
     .build();
-
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
-
 
   app.setGlobalPrefix('api');
   app.useGlobalInterceptors(new ResponseInterceptor());

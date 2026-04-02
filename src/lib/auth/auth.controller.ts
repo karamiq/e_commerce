@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Req, Res, SerializeOptions, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Post, Req, Res, SerializeOptions, UseGuards } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBearerAuth,
@@ -68,37 +68,72 @@ export class AuthController {
     async customerSignin(@Body() signinDto: SignInDto, @Res({ passthrough: true }) res: Response) {
         const { accessToken, refreshToken } = await this.authService.customerSignin(signinDto);
         res.cookie('accessToken', accessToken, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: 'lax',
             secure: false,
             maxAge: 15 * 60 * 1000, // 15 minutes
-            // secure: true, // Uncomment in production with HTTPS
         });
         res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: 'lax',
             secure: false,
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            // secure: true, // Uncomment in production with HTTPS
         });
         return { accessToken, refreshToken };
     }
 
+
     @Post('access-token')
     @Public()
-    @UseGuards(RefreshTokenGuard)
+    // @UseGuards(RefreshTokenGuard)
     @ApiBearerAuth('refresh-token')
     @ApiOperation({ summary: 'Get access token using refresh token' })
     @ApiOkResponse({ description: 'The access token has been successfully generated.' })
     @ApiBadRequestResponse({ description: 'Invalid refresh token supplied.' })
-    async refreshToken(@ActiveUser() activeUser: ActiveUserData, @Res({ passthrough: true }) res: Response) {
-        const accessToken = await this.authService.generateAccessToken(activeUser);
-        res.cookie('accessToken', accessToken, {
+    @ApiBody({
+        // se the body
+        schema: {
+            type: 'object',
+            properties: {
+                refreshToken: {
+                    type: 'string',
+                    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGVJZCI6MSwiaWF0IjoxNjg4ODQyODAwLCJleHAiOjE2ODg4NDY0MDB9.abc123',
+                },
+            },
+            required: ['refreshToken'],
+        },
+    })
+    async refreshToken(@Body() body: { refreshToken: string }, @Res({ passthrough: true }) res: Response) {
+        if (!body || typeof body.refreshToken !== 'string' || !body.refreshToken) {
+            throw new BadRequestException('refreshToken is required in the request body');
+        }
+
+        const { refreshToken } = body;
+        console.log('AuthController - refreshToken called with refreshToken:', refreshToken);
+        const activeUser = await this.authService.validateRefreshToken(refreshToken);
+        if (!activeUser) {
+            throw new BadRequestException('Invalid refresh token');
+        }
+        const decodedToken = await this.authService.decodeRefreshToken(refreshToken);
+        const expiresAt = new Date(decodedToken.exp * 1000);
+        if (expiresAt < new Date()) {
+            throw new BadRequestException('Refresh token has expired');
+        }
+
+        const finalResponse: ActiveUserData = {
+            sub: decodedToken.sub,
+            roleId: decodedToken.roleId,
+            iat: decodedToken.iat,
+            exp: decodedToken.exp,
+        };
+        const tokenResult = await this.authService.generateAccessToken(finalResponse);
+        const accessTokenString = tokenResult.accessToken || tokenResult;
+        res.cookie('accessToken', accessTokenString, {
             httpOnly: true,
             sameSite: 'lax',
             // secure: true, // Uncomment in production with HTTPS
         });
-        return accessToken;
+        return { accessToken: accessTokenString };
     }
 
     @Get('all-refresh-tokens')
