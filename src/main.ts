@@ -1,12 +1,14 @@
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ValidationPipe, HttpException, HttpStatus, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  ValidationPipe,
+  HttpException,
+  HttpStatus,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import cookieParser from 'cookie-parser';
-import { Allow } from 'class-validator';
-
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,41 +16,12 @@ async function bootstrap() {
   app.enableCors({
     origin: true,
     credentials: true,
-  })
+  });
 
-
-  const config = new DocumentBuilder()
-    .setTitle('E-Commerce API')
-    .setDescription('The e-commerce API description')
-    .setVersion('1.0')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        in: 'header',
-      },
-      'access-token', // Access token security scheme
-    )
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        in: 'header',
-      },
-      'refresh-token', // Refresh token security scheme
-    )
-    .addServer('http://localhost:3001/api', 'Development server')
-    .build();
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
-
   app.setGlobalPrefix('api');
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
-
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -56,17 +29,14 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
       transformOptions: {
-        // in the DTO we have @Type(() => Number)
-        // This will allow the transformation of the data to the correct type
-        // This is useful when the data is not in the correct type
-        // For example, if the data is a string, it will be converted to a number
-        // If the data is a string, it will be converted to a number
         enableImplicitConversion: true,
       },
       exceptionFactory: (errors) => {
         return new HttpException(
           {
-            message: errors.map(e => Object.values(e.constraints || {})).flat(),
+            message: errors
+              .map((e) => Object.values(e.constraints || {}))
+              .flat(),
           },
           HttpStatus.BAD_REQUEST,
         );
@@ -77,8 +47,9 @@ async function bootstrap() {
   await app.listen(3001);
 
   console.log(`Application is running on: ${await app.getUrl()}/api`);
-  console.log(`Swagger docs available at: ${await app.getUrl()}/api/docs`);
-
+  console.log(
+    `Import Postman docs from: postman/E-Commerce.postman_collection.json`,
+  );
 }
 
 bootstrap();

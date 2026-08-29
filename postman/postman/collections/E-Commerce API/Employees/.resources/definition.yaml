@@ -1,0 +1,3 @@
+$kind: collection
+description: Employee CRUD. Requires employees:* permissions.
+order: 3000

@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/roles"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "manager",
+      "description": "Manager role with administrative privileges",
+      "permissionIds": [
+        "{{permissionId}}"
+      ]
+    }
+order: 1000

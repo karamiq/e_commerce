@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/products/variants/{{variantId}}"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "additionalPrice": 25,
+      "stockQuantity": 40
+    }
+order: 10000

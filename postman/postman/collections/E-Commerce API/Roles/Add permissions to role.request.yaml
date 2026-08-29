@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/roles/{{roleId}}/permissions/add"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "permissionIds": [
+        "{{permissionId}}"
+      ]
+    }
+order: 6000

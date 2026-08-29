@@ -1,0 +1,18 @@
+$kind: http-request
+description: Create an employee user and assign a role.
+url: "{{baseUrl}}/employees"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "phoneNumber": "+9647728833423",
+      "password": "SecurePassword123!",
+      "roleId": "{{roleId}}"
+    }
+order: 1000

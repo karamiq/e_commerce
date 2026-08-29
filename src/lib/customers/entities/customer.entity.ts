@@ -15,7 +15,10 @@ import { Exclude } from 'class-transformer';
 export class Customer {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @OneToOne(() => User, { onDelete: 'CASCADE', cascade: ['remove', 'soft-remove'] })
+  @OneToOne(() => User, {
+    onDelete: 'CASCADE',
+    cascade: ['remove', 'soft-remove'],
+  })
   @JoinColumn()
   user: User;
 
@@ -24,7 +27,6 @@ export class Customer {
     cascade: true,
   })
   addresses: Address[];
-
 
   @Exclude()
   @ManyToOne(() => Address, {

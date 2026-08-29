@@ -1,0 +1,5 @@
+$kind: http-request
+description: Fetch a single user by UUID.
+url: "{{baseUrl}}/users/{{userId}}"
+method: GET
+order: 2000

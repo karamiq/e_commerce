@@ -1,0 +1,3 @@
+$kind: collection
+description: Health / hello endpoint.
+order: 10000

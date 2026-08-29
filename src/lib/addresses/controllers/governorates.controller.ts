@@ -5,9 +5,7 @@ import { Public } from 'src/lib/auth/decorators/public.decorator';
 
 @Controller('governorates')
 export class GovernoratesController {
-  constructor(
-
-    private readonly addressesService: AddressesService,) { }
+  constructor(private readonly addressesService: AddressesService) {}
 
   @Post()
   create(@Body('name') name: string) {

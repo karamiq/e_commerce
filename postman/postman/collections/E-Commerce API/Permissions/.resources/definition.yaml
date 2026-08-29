@@ -1,0 +1,3 @@
+$kind: collection
+description: Permission CRUD. Requires permissions:* permissions.
+order: 6000

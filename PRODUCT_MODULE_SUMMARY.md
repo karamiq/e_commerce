@@ -137,7 +137,7 @@
 - ✅ Complete CRUD operations for all entities
 - ✅ Proper entity relationships with TypeORM
 - ✅ Input validation with class-validator
-- ✅ Swagger/OpenAPI documentation
+- ✅ Postman collection documentation
 - ✅ Unique constraint validation
 - ✅ Foreign key constraint checks
 - ✅ Cascade delete operations
@@ -164,4 +164,4 @@ The module is ready to test. Make sure:
 1. Database is running (PostgreSQL)
 2. Environment variables are set
 3. Run: `npm run start:dev`
-4. Visit Swagger docs at: `http://localhost:3000/api`
+4. Import the Postman collection from `postman/E-Commerce.postman_collection.json`

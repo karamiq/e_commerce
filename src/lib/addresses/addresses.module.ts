@@ -12,9 +12,12 @@ import { PaginationModule } from 'src/common/pagination/pagination.module';
 import { AddressesController } from './addresses.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Address, City, Governorate, Customer]), PaginationModule],
+  imports: [
+    TypeOrmModule.forFeature([Address, City, Governorate, Customer]),
+    PaginationModule,
+  ],
   controllers: [AddressesController, GovernoratesController, CitiesController],
   providers: [AddressesService],
   exports: [AddressesService],
 })
-export class AddressesModule { }
+export class AddressesModule {}

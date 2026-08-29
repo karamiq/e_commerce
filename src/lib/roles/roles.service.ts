@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, In, Repository } from 'typeorm';
 import { Roles } from './entities/roles.entity';
@@ -9,18 +13,19 @@ import { CreateRoleDto } from './dtos/create-role.dto';
 
 @Injectable()
 export class RolesService {
-
   constructor(
     @InjectRepository(Roles)
     private readonly rolesRepository: Repository<Roles>,
     @InjectRepository(Permissions)
     private readonly permissionsRepository: Repository<Permissions>,
     private readonly paginationService: PaginationService,
-  ) { }
+  ) {}
 
   async create(createRoleDto: CreateRoleDto): Promise<Roles> {
     const { name, description, permissionIds } = createRoleDto;
-    const existingRole = await this.rolesRepository.findOne({ where: { name } });
+    const existingRole = await this.rolesRepository.findOne({
+      where: { name },
+    });
     if (existingRole) {
       throw new ConflictException('Role with this name already exists');
     }
@@ -39,8 +44,8 @@ export class RolesService {
       getRolesDto,
       this.rolesRepository,
       {
-        name: getRolesDto.name ? ILike(`%${getRolesDto.name}%`) : undefined
-      }
+        name: getRolesDto.name ? ILike(`%${getRolesDto.name}%`) : undefined,
+      },
     );
   }
 
@@ -60,11 +65,17 @@ export class RolesService {
     return role;
   }
 
-  async update(id: string, name?: string, description?: string): Promise<Roles> {
+  async update(
+    id: string,
+    name?: string,
+    description?: string,
+  ): Promise<Roles> {
     const role = await this.findOne(id);
 
     if (name && name !== role.name) {
-      const existingRole = await this.rolesRepository.findOne({ where: { name } });
+      const existingRole = await this.rolesRepository.findOne({
+        where: { name },
+      });
       if (existingRole) {
         throw new ConflictException('Role with this name already exists');
       }
@@ -83,27 +94,40 @@ export class RolesService {
     await this.rolesRepository.softRemove(role);
   }
 
-  async addPermissionsToRole(roleId: string, permissionIds: string[]): Promise<Roles> {
+  async addPermissionsToRole(
+    roleId: string,
+    permissionIds: string[],
+  ): Promise<Roles> {
     const role = await this.findOne(roleId);
-    const newPermissions = await this._validateAndFetchPermissions(permissionIds);
+    const newPermissions =
+      await this._validateAndFetchPermissions(permissionIds);
 
     role.permissions = newPermissions;
     return await this.rolesRepository.save(role);
   }
 
-  async removePermissionsFromRole(roleId: string, permissionIds: string[]): Promise<Roles> {
+  async removePermissionsFromRole(
+    roleId: string,
+    permissionIds: string[],
+  ): Promise<Roles> {
     const role = await this.findOne(roleId);
 
-    role.permissions = role.permissions.filter(p => !permissionIds.includes(p.id));
+    role.permissions = role.permissions.filter(
+      (p) => !permissionIds.includes(p.id),
+    );
     return await this.rolesRepository.save(role);
   }
 
-  private async _validateAndFetchPermissions(permissionIds: string[]): Promise<Permissions[]> {
+  private async _validateAndFetchPermissions(
+    permissionIds: string[],
+  ): Promise<Permissions[]> {
     if (!permissionIds || permissionIds.length === 0) {
       return [];
     }
 
-    const permissions = await this.permissionsRepository.findBy({ id: In(permissionIds) });
+    const permissions = await this.permissionsRepository.findBy({
+      id: In(permissionIds),
+    });
     if (permissions.length !== permissionIds.length) {
       throw new NotFoundException('Some permissions were not found');
     }

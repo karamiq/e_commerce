@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/products/attribute-values/{{attributeValueId}}"
+method: DELETE
+order: 22000

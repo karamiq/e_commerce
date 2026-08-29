@@ -1,7 +1,15 @@
-import { CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import User from '../../users/user.entity';
 import { Roles } from '../../roles/entities/roles.entity';
-
 
 @Entity()
 export default class Employees {
@@ -21,5 +29,4 @@ export default class Employees {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
 }

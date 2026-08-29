@@ -1,0 +1,28 @@
+$kind: http-request
+description: Authenticate a customer and store access/refresh tokens.
+url: "{{baseUrl}}/auth/customer/signin"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "email": "customer@example.com",
+      "password": "SecurePassword123!"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |
+      const json = pm.response.json();
+      const payload = json.data || json;
+      if (payload.accessToken) {
+        pm.collectionVariables.set('accessToken', payload.accessToken);
+      }
+      if (payload.refreshToken) {
+        pm.collectionVariables.set('refreshToken', payload.refreshToken);
+      }
+    language: text/javascript
+order: 2000

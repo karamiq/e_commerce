@@ -1,0 +1,1059 @@
+{
+  "info": {
+    "name": "E-Commerce API",
+    "description": "Postman documentation for the NestJS e-commerce backend.\n\n**Base URL:** `{{baseUrl}}` (default `http://localhost:3001/api`)\n\n**Auth:** Most routes expect `Authorization: Bearer {{accessToken}}`.\nRun **Auth / Employee sign in** or **Auth / Customer sign in** first — those requests save tokens to collection variables.\n\n**Responses:** Success bodies are wrapped as `{ data, message, statusCode }`. Paginated lists may also include meta fields.\n\nImport `postman/E-Commerce.postman_collection.json` and `postman/Local.postman_environment.json` into Postman.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001/api"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "employeeId",
+      "value": ""
+    },
+    {
+      "key": "customerId",
+      "value": ""
+    },
+    {
+      "key": "roleId",
+      "value": ""
+    },
+    {
+      "key": "permissionId",
+      "value": ""
+    },
+    {
+      "key": "productId",
+      "value": ""
+    },
+    {
+      "key": "variantId",
+      "value": ""
+    },
+    {
+      "key": "attributeId",
+      "value": ""
+    },
+    {
+      "key": "attributeValueId",
+      "value": ""
+    },
+    {
+      "key": "addressId",
+      "value": ""
+    },
+    {
+      "key": "cityId",
+      "value": ""
+    },
+    {
+      "key": "governorateId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "description": "Public sign-in and token helpers. JWT is also accepted from cookies.",
+      "item": [
+        {
+          "name": "Employee sign in",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/employee/signin",
+            "description": "Authenticate an employee and store access/refresh tokens.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"employee@example.com\",\n  \"password\": \"SecurePassword123!\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "const payload = json.data || json;",
+                  "if (payload.accessToken) {",
+                  "  pm.collectionVariables.set('accessToken', payload.accessToken);",
+                  "}",
+                  "if (payload.refreshToken) {",
+                  "  pm.collectionVariables.set('refreshToken', payload.refreshToken);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Customer sign in",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/customer/signin",
+            "description": "Authenticate a customer and store access/refresh tokens.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"customer@example.com\",\n  \"password\": \"SecurePassword123!\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "const payload = json.data || json;",
+                  "if (payload.accessToken) {",
+                  "  pm.collectionVariables.set('accessToken', payload.accessToken);",
+                  "}",
+                  "if (payload.refreshToken) {",
+                  "  pm.collectionVariables.set('refreshToken', payload.refreshToken);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Refresh access token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/access-token",
+            "description": "Issue a new access token from a refresh token.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "const payload = json.data || json;",
+                  "if (payload.accessToken) {",
+                  "  pm.collectionVariables.set('accessToken', payload.accessToken);",
+                  "}",
+                  "if (payload.refreshToken) {",
+                  "  pm.collectionVariables.set('refreshToken', payload.refreshToken);",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get current user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/me",
+            "description": "Returns the authenticated user payload. Uses the refresh-token guard."
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/auth/logout",
+            "description": "Clears access and refresh cookies."
+          }
+        },
+        {
+          "name": "List refresh tokens",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auth/all-refresh-tokens",
+            "description": "Debug helper: list stored refresh tokens.",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Remove all refresh tokens",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/auth/remove-refresh-token",
+            "description": "Debug helper: delete every stored refresh token.",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "description": "User search and delete. Requires users:read / users:delete.",
+      "item": [
+        {
+          "name": "List users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/users?search=john&status=active&page=1&limit=10",
+            "description": "Search and paginate users."
+          }
+        },
+        {
+          "name": "Get user by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/users/{{userId}}",
+            "description": "Fetch a single user by UUID."
+          }
+        },
+        {
+          "name": "Soft delete user",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/users/soft/{{userId}}",
+            "description": "Soft-delete a user."
+          }
+        },
+        {
+          "name": "Hard delete user",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/users/hard/{{userId}}",
+            "description": "Permanently delete a user."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "description": "Employee CRUD. Requires employees:* permissions.",
+      "item": [
+        {
+          "name": "Create employee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/employees",
+            "description": "Create an employee user and assign a role.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"+9647728833423\",\n  \"password\": \"SecurePassword123!\",\n  \"roleId\": \"{{roleId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List employees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/employees?status=active&page=1&limit=10",
+            "description": "Search and paginate employees."
+          }
+        },
+        {
+          "name": "Get employee by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/employees/{{employeeId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update employee",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/employees/{{employeeId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleId\": \"{{roleId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update employee role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/employees/{{employeeId}}/role",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleId\": \"{{roleId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Permanently delete employee",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/employees/{{employeeId}}/permanent",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "description": "Customer CRUD. Requires customers:* except profile (authenticated).",
+      "item": [
+        {
+          "name": "Create customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/customers",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"email\": \"jane.smith@example.com\",\n  \"phoneNumber\": \"+9647728833424\",\n  \"password\": \"SecurePassword123!\",\n  \"shippingAddress\": \"123 Main St, Baghdad\",\n  \"dateOfBirth\": \"1990-01-15\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/customers?status=active&page=1&limit=10",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get current customer profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/customers/profile",
+            "description": "Profile for the authenticated customer."
+          }
+        },
+        {
+          "name": "Get customer by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/customers/{{customerId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update customer",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/customers/{{customerId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shippingAddress\": \"Karrada, Street 10\",\n  \"dateOfBirth\": \"1990-01-15\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "description": "Role CRUD and permission assignment. Requires roles:* permissions.",
+      "item": [
+        {
+          "name": "Create role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/roles",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"manager\",\n  \"description\": \"Manager role with administrative privileges\",\n  \"permissionIds\": [\n    \"{{permissionId}}\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "List roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/roles?status=active&page=1&limit=10",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get role by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/roles/{{roleId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/roles/{{roleId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"manager\",\n  \"description\": \"Updated description\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete role",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/roles/{{roleId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Add permissions to role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/roles/{{roleId}}/permissions/add",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissionIds\": [\n    \"{{permissionId}}\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Remove permissions from role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/roles/{{roleId}}/permissions/remove",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissionIds\": [\n    \"{{permissionId}}\"\n  ]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Permissions",
+      "description": "Permission CRUD. Requires permissions:* permissions.",
+      "item": [
+        {
+          "name": "Create permission",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/permissions",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"products:create\",\n  \"description\": \"Allows creating products\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List permissions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/permissions?page=1&limit=10",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get permission by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/permissions/{{permissionId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update permission",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/permissions/{{permissionId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"products:update\",\n  \"description\": \"Allows updating products\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete permission",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/permissions/{{permissionId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get permissions by role ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/permissions/role-permissions/{{roleId}}",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "description": "Catalog, variants, attributes, and attribute values.",
+      "item": [
+        {
+          "name": "Create product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"iPhone 15 Pro\",\n  \"description\": \"Latest Apple smartphone\",\n  \"sku\": \"IP15PRO-256-BLK\",\n  \"basePrice\": 999.99,\n  \"stockQuantity\": 100,\n  \"isActive\": true,\n  \"imageUrl\": \"https://example.com/image.jpg\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get product by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/{{productId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products/{{productId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"iPhone 15 Pro\",\n  \"basePrice\": 949.99,\n  \"isActive\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/products/{{productId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Create variant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products/variants",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"{{productId}}\",\n  \"sku\": \"IP15PRO-256-RED\",\n  \"additionalPrice\": 50,\n  \"stockQuantity\": 50,\n  \"isActive\": true,\n  \"attributeValueIds\": [\n    \"{{attributeValueId}}\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "List all variants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/variants/all",
+            "description": ""
+          }
+        },
+        {
+          "name": "List variants for product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/{{productId}}/variants",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get variant by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/variants/{{variantId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update variant",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products/variants/{{variantId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"additionalPrice\": 25,\n  \"stockQuantity\": 40\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete variant",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/products/variants/{{variantId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Create attribute",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products/attributes",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Color\",\n  \"description\": \"Product color options\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "List attributes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/attributes/all",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get attribute by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/attributes/{{attributeId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update attribute",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products/attributes/{{attributeId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Colour\",\n  \"displayOrder\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete attribute",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/products/attributes/{{attributeId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Create attribute value",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products/attribute-values",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributeId\": \"{{attributeId}}\",\n  \"value\": \"Red\",\n  \"displayOrder\": 1,\n  \"isActive\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "List all attribute values",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/attribute-values/all",
+            "description": ""
+          }
+        },
+        {
+          "name": "List values for attribute",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/attributes/{{attributeId}}/values",
+            "description": ""
+          }
+        },
+        {
+          "name": "Get attribute value by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/products/attribute-values/{{attributeValueId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Update attribute value",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/products/attribute-values/{{attributeValueId}}",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"Crimson\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete attribute value",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/products/attribute-values/{{attributeValueId}}",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "Addresses",
+      "description": "Customer addresses plus Iraq geography lookups.",
+      "item": [
+        {
+          "name": "Create address",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/addresses",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"{{customerId}}\",\n  \"cityId\": \"{{cityId}}\",\n  \"street\": \"Karrada, Street 10, House 22\",\n  \"building\": \"Building A, Apt 5\",\n  \"notes\": \"Leave at reception\",\n  \"isDefault\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "List customer addresses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/customers/{{customerId}}/addresses",
+            "description": ""
+          }
+        },
+        {
+          "name": "Set default address",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/customers/{{customerId}}/addresses/{{addressId}}/default",
+            "description": ""
+          }
+        },
+        {
+          "name": "Select delivery address",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/customers/{{customerId}}/addresses/{{addressId}}/select",
+            "description": ""
+          }
+        },
+        {
+          "name": "Delete address",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/addresses/{{addressId}}",
+            "description": ""
+          }
+        },
+        {
+          "name": "Create governorate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/governorates",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Baghdad\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List governorates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/governorates?page=1&limit=10",
+            "description": "Public list of governorates.",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Create city",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/cities",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Karrada\",\n  \"governorateId\": \"{{governorateId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List cities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cities?governorateId=%7B%7BgovernorateId%7D%7D",
+            "description": "Public list of cities. Optional governorateId filter.",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "description": "Notification listing. Requires notifications:read.",
+      "item": [
+        {
+          "name": "List notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/notifications/all-notifications",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "App",
+      "description": "Health / hello endpoint.",
+      "item": [
+        {
+          "name": "Hello",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/",
+            "description": "Public health check.",
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

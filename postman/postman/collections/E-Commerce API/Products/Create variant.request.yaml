@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{baseUrl}}/products/variants"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "productId": "{{productId}}",
+      "sku": "IP15PRO-256-RED",
+      "additionalPrice": 50,
+      "stockQuantity": 50,
+      "isActive": true,
+      "attributeValueIds": [
+        "{{attributeValueId}}"
+      ]
+    }
+order: 6000

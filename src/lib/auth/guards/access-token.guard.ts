@@ -1,12 +1,16 @@
-import { ExecutionContext, ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { PERMISSIONS_KEY } from 'src/lib/permissions/decorators/permissions.decorator';
 
 @Injectable()
 export class AccessTokenGuard extends AuthGuard('jwt') {
-  constructor(
-    private reflector: Reflector) {
+  constructor(private reflector: Reflector) {
     super();
   }
 
@@ -16,10 +20,10 @@ export class AccessTokenGuard extends AuthGuard('jwt') {
       context.getClass(),
     ]);
 
-    const requiredPermission = this.reflector.getAllAndOverride<string>(PERMISSIONS_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const requiredPermission = this.reflector.getAllAndOverride<string>(
+      PERMISSIONS_KEY,
+      [context.getHandler(), context.getClass()],
+    );
 
     if (isPublic) {
       return true;
@@ -36,13 +40,13 @@ export class AccessTokenGuard extends AuthGuard('jwt') {
       return false;
     }
 
-
     if (!requiredPermission || requiredPermission.length === 0) {
       return true;
     }
 
     // Check permissions after user is attached
-    const userPermissions = context.switchToHttp().getRequest().user?.permissions;
+    const userPermissions = context.switchToHttp().getRequest()
+      .user?.permissions;
 
     // if the user has no permissions at all then thats just a customer which cannot access protected routes
     // unless its a public route
@@ -63,5 +67,4 @@ export class AccessTokenGuard extends AuthGuard('jwt') {
 
     return user;
   }
-
 }

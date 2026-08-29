@@ -1,6 +1,14 @@
-import { Permissions } from "src/lib/permissions/entities/permissions.entity";
-import User from "src/lib/users/user.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Permissions } from 'src/lib/permissions/entities/permissions.entity';
+import User from 'src/lib/users/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Roles {
@@ -11,13 +19,13 @@ export class Roles {
     nullable: false,
     unique: true,
     type: 'varchar',
-    length: 100
+    length: 100,
   })
   name: string;
 
   @Column({
     type: 'text',
-    nullable: true
+    nullable: true,
   })
   description: string;
 

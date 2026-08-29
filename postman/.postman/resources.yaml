@@ -1,0 +1,18 @@
+workspace:
+  id: ""
+
+localResources:
+  collections:
+    - ../E-Commerce.postman_collection.json
+  environments:
+    - ../Local.postman_environment.json
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  environments:
+    ../Local.postman_environment.json: 34867098-dad61de6-4bd6-43b6-9e9a-e2b7eba7de65
+  globals:
+    ../postman/globals/workspace.globals.yaml: bcc676b1-0b30-49ca-8265-e80dda618451
+  collections:
+    ../postman/collections/E-Commerce API: 135784b7-633a-4382-930e-8d04114aa2ab

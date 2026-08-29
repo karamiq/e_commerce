@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/products/attributes/{{attributeId}}"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Colour",
+      "displayOrder": 1
+    }
+order: 15000

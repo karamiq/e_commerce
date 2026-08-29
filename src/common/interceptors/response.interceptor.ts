@@ -11,10 +11,7 @@ import { Paginated } from '../pagination/interfaces/paginated.interface';
 
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
-  intercept(
-    context: ExecutionContext,
-    next: CallHandler,
-  ): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const res = context.switchToHttp().getResponse();
     return next.handle().pipe(
       map((data) => {
@@ -26,7 +23,7 @@ export class ResponseInterceptor implements NestInterceptor {
           ...meta,
           message: messege,
           statusCode: res.statusCode,
-        }
+        };
       }),
     );
   }

@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/customers/{{customerId}}"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "shippingAddress": "Karrada, Street 10",
+      "dateOfBirth": "1990-01-15"
+    }
+order: 5000

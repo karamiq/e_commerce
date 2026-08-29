@@ -1,0 +1,34 @@
+$kind: collection
+description: |-
+  Postman documentation for the NestJS e-commerce backend.
+
+  **Base URL:** `{{baseUrl}}` (default `http://localhost:3001/api`)
+
+  **Auth:** Most routes expect `Authorization: Bearer {{accessToken}}`.
+  Run **Auth / Employee sign in** or **Auth / Customer sign in** first — those requests save tokens to collection variables.
+
+  **Responses:** Success bodies are wrapped as `{ data, message, statusCode }`. Paginated lists may also include meta fields.
+
+  Import `postman/E-Commerce.postman_collection.json` and `postman/Local.postman_environment.json` into Postman.
+variables:
+  baseUrl: http://localhost:3001/api
+  accessToken: ""
+  refreshToken: ""
+  userId: ""
+  employeeId: ""
+  customerId: ""
+  roleId: ""
+  permissionId: ""
+  productId: ""
+  variantId: ""
+  attributeId: ""
+  attributeValueId: ""
+  addressId: ""
+  cityId: ""
+  governorateId: ""
+auth:
+  - id: 0efa8ab4-0c6a-408c-9e42-2b6e83dc223e
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{accessToken}}"

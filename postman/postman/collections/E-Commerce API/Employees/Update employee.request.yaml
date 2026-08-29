@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/employees/{{employeeId}}"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "roleId": "{{roleId}}"
+    }
+order: 4000

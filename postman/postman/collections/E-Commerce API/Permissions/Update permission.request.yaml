@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/permissions/{{permissionId}}"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "products:update",
+      "description": "Allows updating products"
+    }
+order: 4000

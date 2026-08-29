@@ -1,0 +1,10 @@
+$kind: http-request
+description: Public list of governorates.
+url: "{{baseUrl}}/governorates?page=1&limit=10"
+method: GET
+queryParams:
+  page: "1"
+  limit: "10"
+auth:
+  type: noauth
+order: 7000

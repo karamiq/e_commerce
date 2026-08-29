@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/cities"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Karrada",
+      "governorateId": "{{governorateId}}"
+    }
+order: 8000

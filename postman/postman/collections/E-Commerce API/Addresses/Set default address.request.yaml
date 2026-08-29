@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/customers/{{customerId}}/addresses/{{addressId}}/default"
+method: PATCH
+order: 3000

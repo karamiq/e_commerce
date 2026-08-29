@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/addresses"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "customerId": "{{customerId}}",
+      "cityId": "{{cityId}}",
+      "street": "Karrada, Street 10, House 22",
+      "building": "Building A, Apt 5",
+      "notes": "Leave at reception",
+      "isDefault": true
+    }
+order: 1000

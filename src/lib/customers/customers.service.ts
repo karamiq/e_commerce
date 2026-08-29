@@ -16,7 +16,7 @@ export class CustomersService {
     private readonly customerRepository: Repository<Customer>,
     private readonly usersService: UsersService,
     private readonly paginationService: PaginationService,
-  ) { }
+  ) {}
 
   async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
     const user = await this.usersService.createUser({
@@ -25,7 +25,7 @@ export class CustomersService {
       firstName: createCustomerDto.firstName,
       lastName: createCustomerDto.lastName,
       phoneNumber: createCustomerDto.phoneNumber,
-    },);
+    });
 
     const customer = this.customerRepository.create({
       ...createCustomerDto,
@@ -39,7 +39,7 @@ export class CustomersService {
 
     const query = this.customerRepository
       .createQueryBuilder('customer')
-      .leftJoinAndSelect('customer.user', 'user')
+      .leftJoinAndSelect('customer.user', 'user');
     // Handle soft delete filtering
     switch (status) {
       case StatusFilter.DELETED:
@@ -62,10 +62,10 @@ export class CustomersService {
       );
     }
 
-    return await this.paginationService.paginateQueryBuilder<Customer>(
-      query,
-      { page, limit },
-    );
+    return await this.paginationService.paginateQueryBuilder<Customer>(query, {
+      page,
+      limit,
+    });
   }
 
   async findOne(id: string): Promise<Customer> {
@@ -107,7 +107,10 @@ export class CustomersService {
     return customer;
   }
 
-  async update(id: string, updateCustomerDto: UpdateCustomerDto): Promise<Customer> {
+  async update(
+    id: string,
+    updateCustomerDto: UpdateCustomerDto,
+  ): Promise<Customer> {
     const customer = await this.findOne(id);
 
     Object.assign(customer, updateCustomerDto);

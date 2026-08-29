@@ -1,0 +1,10 @@
+$kind: http-request
+description: Search and paginate users.
+url: "{{baseUrl}}/users?search=john&status=active&page=1&limit=10"
+method: GET
+queryParams:
+  search: john
+  status: active
+  page: "1"
+  limit: "10"
+order: 1000

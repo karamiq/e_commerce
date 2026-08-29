@@ -1,0 +1,5 @@
+$kind: http-request
+description: Permanently delete a user.
+url: "{{baseUrl}}/users/hard/{{userId}}"
+method: DELETE
+order: 4000

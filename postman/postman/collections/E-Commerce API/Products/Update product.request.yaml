@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/products/{{productId}}"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "iPhone 15 Pro",
+      "basePrice": 949.99,
+      "isActive": true
+    }
+order: 4000

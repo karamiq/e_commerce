@@ -61,6 +61,17 @@ npm run test:cov
 - **Testing:** Jest
 - **Linting:** ESLint
 
+## API documentation
+
+Interactive API docs live in Postman, not Swagger.
+
+1. Import `postman/E-Commerce.postman_collection.json`
+2. Import `postman/Local.postman_environment.json` (optional; the collection also has a `baseUrl` variable)
+3. Start the API with `npm run start:dev`
+4. Run **Auth → Employee sign in** or **Auth → Customer sign in** so access/refresh tokens are saved on the collection
+
+Default base URL: `http://localhost:3001/api`
+
 ## License
 
 MIT

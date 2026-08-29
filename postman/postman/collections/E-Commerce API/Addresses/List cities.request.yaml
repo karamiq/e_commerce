@@ -1,0 +1,9 @@
+$kind: http-request
+description: Public list of cities. Optional governorateId filter.
+url: "{{baseUrl}}/cities?governorateId=%7B%7BgovernorateId%7D%7D"
+method: GET
+queryParams:
+  governorateId: "%7B%7BgovernorateId%7D%7D"
+auth:
+  type: noauth
+order: 9000

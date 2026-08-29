@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/customers"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "phoneNumber": "+9647728833424",
+      "password": "SecurePassword123!",
+      "shippingAddress": "123 Main St, Baghdad",
+      "dateOfBirth": "1990-01-15"
+    }
+order: 1000

@@ -19,4 +19,4 @@ import { PaginationModule } from 'src/common/pagination/pagination.module';
   providers: [CustomersService],
   exports: [CustomersService],
 })
-export class CustomersModule { }
+export class CustomersModule {}

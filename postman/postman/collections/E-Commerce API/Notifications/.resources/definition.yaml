@@ -1,0 +1,3 @@
+$kind: collection
+description: Notification listing. Requires notifications:read.
+order: 9000

@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/governorates"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Baghdad"
+    }
+order: 6000

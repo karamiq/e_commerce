@@ -32,7 +32,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message = exception.message || message;
     }
     response.status(status).json({
-      data: {},          // ✅ ALWAYS object
+      data: {}, // ✅ ALWAYS object
       message,
       statusCode: status,
     });

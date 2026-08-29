@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/roles/{{roleId}}/permissions/remove"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "permissionIds": [
+        "{{permissionId}}"
+      ]
+    }
+order: 7000

@@ -1,0 +1,3 @@
+$kind: collection
+description: Role CRUD and permission assignment. Requires roles:* permissions.
+order: 5000

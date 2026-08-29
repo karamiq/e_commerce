@@ -5,20 +5,23 @@ https://docs.nestjs.com/providers#services
 import { Injectable, Inject } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import { Paginated } from './interfaces/paginated.interface';
-import { ObjectLiteral, Repository, SelectQueryBuilder, FindOptionsWhere } from 'typeorm';
+import {
+  ObjectLiteral,
+  Repository,
+  SelectQueryBuilder,
+  FindOptionsWhere,
+} from 'typeorm';
 import { PaginationQueryDto, StatusFilter } from './dtos/pagination-query.dto';
 import type { Request } from 'express';
 
 @Injectable()
 export class PaginationService {
-  constructor(
-    @Inject(REQUEST) private readonly request: Request,
-  ) { }
+  constructor(@Inject(REQUEST) private readonly request: Request) {}
 
   public async paginate<T extends ObjectLiteral>(
     paginationQuery: PaginationQueryDto,
     repository: Repository<T>,
-    whereConditions?: FindOptionsWhere<T>
+    whereConditions?: FindOptionsWhere<T>,
   ): Promise<Paginated<T>> {
     const page = paginationQuery.page;
     const limit = paginationQuery.limit;
@@ -28,13 +31,15 @@ export class PaginationService {
 
     if (status === StatusFilter.DELETED) {
       const alias = repository.metadata.tableName;
-      results = await repository.createQueryBuilder(alias)
+      results = await repository
+        .createQueryBuilder(alias)
         .withDeleted()
         .where(`${alias}.deletedAt IS NOT NULL`)
         .take(limit)
         .skip((page - 1) * limit)
         .getMany();
-      totalItems = await repository.createQueryBuilder(alias)
+      totalItems = await repository
+        .createQueryBuilder(alias)
         .withDeleted()
         .where(`${alias}.deletedAt IS NOT NULL`)
         .getCount();
@@ -76,10 +81,14 @@ export class PaginationService {
           first: `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${firstPage}`,
           last: `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${lastPage}`,
           current: `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${page}`,
-          next: nextPage ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${nextPage}` : null,
-          previous: previousPage ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${previousPage}` : null,
-        }
-      }
+          next: nextPage
+            ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${nextPage}`
+            : null,
+          previous: previousPage
+            ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${previousPage}`
+            : null,
+        },
+      },
     };
     return finalResponse;
   }
@@ -115,10 +124,14 @@ export class PaginationService {
           first: `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${firstPage}`,
           last: `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${lastPage}`,
           current: `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${page}`,
-          next: nextPage ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${nextPage}` : null,
-          previous: previousPage ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${previousPage}` : null,
-        }
-      }
+          next: nextPage
+            ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${nextPage}`
+            : null,
+          previous: previousPage
+            ? `${newUrl.host}${newUrl.pathname}?limit=${limit}&page=${previousPage}`
+            : null,
+        },
+      },
     };
     return finalResponse;
   }

@@ -1,0 +1,7 @@
+$kind: http-request
+description: "Debug helper: delete every stored refresh token."
+url: "{{baseUrl}}/auth/remove-refresh-token"
+method: DELETE
+auth:
+  type: noauth
+order: 7000

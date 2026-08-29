@@ -10,9 +10,14 @@ import { PaginationModule } from 'src/common/pagination/pagination.module';
 import { RolesModule } from '../roles/roles.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Employees, User]), UsersModule, PaginationModule, RolesModule],
+  imports: [
+    TypeOrmModule.forFeature([Employees, User]),
+    UsersModule,
+    PaginationModule,
+    RolesModule,
+  ],
   controllers: [EmployeesController],
   providers: [EmployeesService],
   exports: [EmployeesService],
 })
-export class EmployeesModule { }
+export class EmployeesModule {}

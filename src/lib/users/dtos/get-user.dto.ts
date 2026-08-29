@@ -1,14 +1,9 @@
-import { ApiProperty, IntersectionType } from '@nestjs/swagger';
+import { IntersectionType } from '@nestjs/mapped-types';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PaginationQueryDto } from 'src/common/pagination/dtos/pagination-query.dto';
 
 export class GetUserBaseDto {
-  @ApiProperty({
-    required: false,
-    description: 'Search by user name, email, or phone number',
-    type: 'string',
-  })
   @IsOptional()
   @IsString()
   @Type(() => String)
@@ -18,4 +13,4 @@ export class GetUserBaseDto {
 export class GetUsersDto extends IntersectionType(
   GetUserBaseDto,
   PaginationQueryDto,
-) { }
+) {}

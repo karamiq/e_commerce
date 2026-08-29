@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/products/attribute-values"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "attributeId": "{{attributeId}}",
+      "value": "Red",
+      "displayOrder": 1,
+      "isActive": true
+    }
+order: 17000

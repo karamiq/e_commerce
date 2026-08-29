@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/products/attribute-values/{{attributeValueId}}"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "value": "Crimson"
+    }
+order: 21000

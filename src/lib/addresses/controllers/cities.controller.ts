@@ -4,13 +4,15 @@ import { Public } from 'src/lib/auth/decorators/public.decorator';
 
 @Controller('cities')
 export class CitiesController {
-  constructor(private readonly addressesService: AddressesService) { }
+  constructor(private readonly addressesService: AddressesService) {}
 
   @Post()
-  create(@Body('name') name: string, @Body('governorateId') governorateId: string) {
+  create(
+    @Body('name') name: string,
+    @Body('governorateId') governorateId: string,
+  ) {
     return this.addressesService.createCity(name, governorateId);
   }
-
 
   @Get()
   @Public()

@@ -6,9 +6,13 @@ import { UsersController } from './users.controller';
 import { AuthModule } from '../auth/auth.module';
 import { PaginationModule } from 'src/common/pagination/pagination.module';
 @Module({
-    providers: [UsersService],
-    exports: [UsersService],
-    controllers: [UsersController],
-    imports: [TypeOrmModule.forFeature([User]), forwardRef(() => AuthModule), PaginationModule],
+  providers: [UsersService],
+  exports: [UsersService],
+  controllers: [UsersController],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    forwardRef(() => AuthModule),
+    PaginationModule,
+  ],
 })
-export class UsersModule { }
+export class UsersModule {}

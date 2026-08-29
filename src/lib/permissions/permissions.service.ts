@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Permissions } from './entities/permissions.entity';
@@ -13,10 +17,12 @@ export class PermissionsService {
     private readonly permissionsRepository: Repository<Permissions>,
     private readonly paginationService: PaginationService,
     private readonly rolesService: RolesService,
-  ) { }
+  ) {}
 
   async create(name: string, description?: string): Promise<Permissions> {
-    const existingPermission = await this.permissionsRepository.findOne({ where: { name } });
+    const existingPermission = await this.permissionsRepository.findOne({
+      where: { name },
+    });
     if (existingPermission) {
       throw new ConflictException('Permission with this name already exists');
     }
@@ -29,22 +35,30 @@ export class PermissionsService {
     return await this.paginationService.paginate<Permissions>(
       getPermissionsDto,
       this.permissionsRepository,
-      {}
+      {},
     );
   }
 
   async findOne(id: string) {
-    const permission = await this.permissionsRepository.findOne({ where: { id } });
+    const permission = await this.permissionsRepository.findOne({
+      where: { id },
+    });
     if (!permission) {
       throw new NotFoundException(`Permission with ID ${id} not found`);
     }
     return permission;
   }
-  async update(id: string, name?: string, description?: string): Promise<Permissions> {
+  async update(
+    id: string,
+    name?: string,
+    description?: string,
+  ): Promise<Permissions> {
     const permission = await this.findOne(id);
 
     if (name && name !== permission.name) {
-      const existingPermission = await this.permissionsRepository.findOne({ where: { name } });
+      const existingPermission = await this.permissionsRepository.findOne({
+        where: { name },
+      });
       if (existingPermission) {
         throw new ConflictException('Permission with this name already exists');
       }
@@ -69,9 +83,8 @@ export class PermissionsService {
       new GetPermissionsDto(),
       this.permissionsRepository,
       {
-        roles: { id: role.id }
-      }
+        roles: { id: role.id },
+      },
     );
-
   }
 }

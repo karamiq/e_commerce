@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/employees/{{employeeId}}/permanent"
+method: DELETE
+order: 6000

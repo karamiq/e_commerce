@@ -13,8 +13,8 @@
 
 ## Overview
 
-**Base URL:** `http://localhost:3000/api`  
-**API Documentation:** `http://localhost:3000/api/docs` (Swagger UI)  
+**Base URL:** `http://localhost:3001/api`  
+**API Documentation:** Import `postman/E-Commerce.postman_collection.json` (Postman)  
 **Framework:** NestJS with TypeORM (PostgreSQL)  
 **Authentication:** JWT Bearer Tokens (Access + Refresh)
 
@@ -1053,11 +1053,11 @@ export const ProductList: React.FC = () => {
    npm run start:dev
    ```
 
-2. **Access Swagger UI:**
-   Open `http://localhost:3000/api/docs`
+2. **Import Postman collection:**
+   Import `postman/E-Commerce.postman_collection.json` and `postman/Local.postman_environment.json`. Run **Auth / Employee sign in** (or customer sign in) to populate tokens.
 
 3. **Test with HTTP Files:**
-   Use provided `.http` files in `src/modules/product/http/` with REST Client extension
+   Use provided `.http` files in `src/lib/product/http/` with REST Client extension
 
 4. **Example Test Flow:**
    - Create attributes (Color, Size, Storage)
@@ -1070,7 +1070,7 @@ export const ProductList: React.FC = () => {
 
 ## Support & Resources
 
-- **Swagger Documentation:** `http://localhost:3000/api/docs`
+- **Postman Documentation:** `postman/E-Commerce.postman_collection.json`
 - **Product Module README:** `/src/modules/product/README.md`
 - **Quick Start Guide:** `/src/modules/product/QUICK_START.md`
 - **HTTP Test Files:** `/src/modules/product/http/*.http`

@@ -7,10 +7,9 @@ import { Global, Module } from '@nestjs/common';
 
 @Global()
 @Module({
-    imports: [],
-    controllers: [],
-    providers: [
-        PaginationService,],
-    exports: [PaginationService],
+  imports: [],
+  controllers: [],
+  providers: [PaginationService],
+  exports: [PaginationService],
 })
-export class PaginationModule { }
+export class PaginationModule {}

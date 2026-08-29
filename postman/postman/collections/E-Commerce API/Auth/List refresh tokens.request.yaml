@@ -1,0 +1,7 @@
+$kind: http-request
+description: "Debug helper: list stored refresh tokens."
+url: "{{baseUrl}}/auth/all-refresh-tokens"
+method: GET
+auth:
+  type: noauth
+order: 6000

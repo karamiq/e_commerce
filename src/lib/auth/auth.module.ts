@@ -18,32 +18,30 @@ import { CustomersModule } from '../customers/customers.module';
 import { RolesModule } from '../roles/roles.module';
 
 @Module({
-    imports: [
-        forwardRef(() => UsersModule),
-        forwardRef(() => EmployeesModule),
-        forwardRef(() => CustomersModule),
-        RolesModule,
-        PassportModule.register({ defaultStrategy: 'jwt' }),
-        JwtModule.register({
-        }),
-        TypeOrmModule.forFeature([UserRefreshToken]),
+  imports: [
+    forwardRef(() => UsersModule),
+    forwardRef(() => EmployeesModule),
+    forwardRef(() => CustomersModule),
+    RolesModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.register({}),
+    TypeOrmModule.forFeature([UserRefreshToken]),
+  ],
 
-    ],
-
-    providers: [
-        AuthService,
-        AccessTokenStrategy,
-        AccessTokenGuard,
-        RefreshTokenGuard,
-        RefreshTokenStrategy,
-        TokensProvider,
-        {
-            // if someone asks for HashingProvider, provide BcryptProvider
-            provide: HashingProvider,
-            useClass: BcryptHashingProvider,
-        },
-    ],
-    exports: [AuthService, AccessTokenGuard, RefreshTokenGuard, HashingProvider],
-    controllers: [AuthController],
+  providers: [
+    AuthService,
+    AccessTokenStrategy,
+    AccessTokenGuard,
+    RefreshTokenGuard,
+    RefreshTokenStrategy,
+    TokensProvider,
+    {
+      // if someone asks for HashingProvider, provide BcryptProvider
+      provide: HashingProvider,
+      useClass: BcryptHashingProvider,
+    },
+  ],
+  exports: [AuthService, AccessTokenGuard, RefreshTokenGuard, HashingProvider],
+  controllers: [AuthController],
 })
-export class AuthModule { }
+export class AuthModule {}

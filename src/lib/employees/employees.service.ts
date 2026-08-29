@@ -19,7 +19,7 @@ export class EmployeesService {
     private readonly paginationService: PaginationService,
     private readonly userService: UsersService,
     private readonly rolesService: RolesService,
-  ) { }
+  ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto): Promise<any> {
     const role = await this.rolesService.findOne(createEmployeeDto.roleId);
@@ -30,7 +30,7 @@ export class EmployeesService {
       firstName: createEmployeeDto.firstName,
       lastName: createEmployeeDto.lastName,
       phoneNumber: createEmployeeDto.phoneNumber,
-    },);
+    });
 
     const employee = this.employeeRepository.create({
       role: role,
@@ -47,7 +47,7 @@ export class EmployeesService {
       lastName: employee.user?.lastName,
       phoneNumber: employee.user?.phoneNumber,
       role: employee.role ?? null,
-    }
+    };
   }
 
   async findAll(getEmployeesDto: GetEmployeesDto) {
@@ -84,10 +84,10 @@ export class EmployeesService {
       query.andWhere('role.name = :role', { role });
     }
 
-    return await this.paginationService.paginateQueryBuilder<Employees>(
-      query,
-      { page, limit },
-    );
+    return await this.paginationService.paginateQueryBuilder<Employees>(query, {
+      page,
+      limit,
+    });
   }
 
   async findOne(id: string): Promise<Employees> {
@@ -124,7 +124,10 @@ export class EmployeesService {
     return employee;
   }
 
-  async update(id: string, updateEmployeeDto: UpdateEmployeeDto): Promise<Employees> {
+  async update(
+    id: string,
+    updateEmployeeDto: UpdateEmployeeDto,
+  ): Promise<Employees> {
     const employee = await this.findOne(id);
 
     if (updateEmployeeDto.roleId) {
@@ -134,7 +137,6 @@ export class EmployeesService {
 
     return await this.employeeRepository.save(employee);
   }
-
 
   async deletePermanently(id: string): Promise<Employees> {
     const employee = await this.findOne(id);
