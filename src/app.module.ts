@@ -1,5 +1,6 @@
 import { PaginationModule } from './common/pagination/pagination.module';
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './lib/auth/auth.module';
@@ -13,9 +14,19 @@ import { PermissionsModule } from './lib/permissions/permissions.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenGuard } from './lib/auth/guards/access-token.guard';
+import appConfig from './config/app.config';
+import databaseConfig from './config/database.config';
+import jwtConfig from './config/jwt.config';
+import environmentValidation from './config/environment.validation';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [`.env.${process.env.NODE_ENV || 'development'}`, '.env'],
+      load: [appConfig, databaseConfig, jwtConfig],
+      validationSchema: environmentValidation,
+    }),
     PaginationModule,
     AuthModule,
     RolesModule,
@@ -25,15 +36,18 @@ import { AccessTokenGuard } from './lib/auth/guards/access-token.guard';
     NotificationsModule,
     AddressesModule,
     UsersModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '200411',
-      database: 'postgres',
-      autoLoadEntities: true,
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.getOrThrow<string>('database.host'),
+        port: configService.getOrThrow<number>('database.port'),
+        username: configService.getOrThrow<string>('database.user'),
+        password: configService.getOrThrow<string>('database.password'),
+        database: configService.getOrThrow<string>('database.name'),
+        synchronize: configService.get<boolean>('database.synchronize'),
+        autoLoadEntities: configService.get<boolean>('database.autoLoadEntities'),
+      }),
     }),
   ],
   controllers: [AppController],

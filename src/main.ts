@@ -9,9 +9,11 @@ import {
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import cookieParser from 'cookie-parser';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
   app.use(cookieParser());
   app.enableCors({
     origin: true,
@@ -44,7 +46,8 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(3001);
+  const port = configService.get<number>('appConfig.port') ?? 3001;
+  await app.listen(port);
 
   console.log(`Application is running on: ${await app.getUrl()}/api`);
   console.log(
